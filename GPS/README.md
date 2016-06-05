@@ -7,8 +7,14 @@ This library it's compatible with UART GPS modules with NMEA0183 messages
 
 Download folder:
     git clone https://github.com/manuelgalindo/Arduino-Libraries/tree/master/GPS
+    
+    
 Copy GPS folder to arduino library folder
+
+
     Linux: ~/Arduino/libraries
+    
+    
     Windows: %userprofile%/Documents/Arduino/libraries
 
 Enjoy!     
