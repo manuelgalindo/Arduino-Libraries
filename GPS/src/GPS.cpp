@@ -45,6 +45,7 @@ GPSDATA GPS::read() {
     if (inChar == '\n') {
       if (inputString.substring(0, 6) == "$GPGGA")
       {
+        Serial.println(inputString);
         nmea_decode(0);
       }
       if (inputString.substring(0, 6) == "$GPRMC")
@@ -89,10 +90,12 @@ GPSDATA GPS::nmea_decode(uint8_t mode)
               }
             case 1: {
                 int a = msg.indexOf('.');
-                String out1 = msg.substring(0, a);
-                String out2 = msg.substring(a + 1, a + 6);
-                gps.lat = out1.toInt() * 100000;
-                gps.lat = gps.lat + out2.toInt();
+                String out1 = msg.substring(0, a - 2);
+                String out2 = msg.substring(a - 2, a);
+                String out3 = msg.substring(a + 1, a + 6);
+                long mmm = (out2.toInt()*100000 + out3.toInt())*1.66666666;
+                gps.lat = out1.toInt() * 10000000;
+                gps.lat = gps.lat + mmm; 
                 break;
               }
             case 2: {
@@ -103,10 +106,12 @@ GPSDATA GPS::nmea_decode(uint8_t mode)
               }
             case 3: {
                 int a = msg.indexOf('.');
-                String out1 = msg.substring(0, a);
-                String out2 = msg.substring(a + 1, a + 6);
-                gps.lon = out1.toInt() * 100000;
-                gps.lon = gps.lon + out2.toInt();
+                String out1 = msg.substring(0, a - 2);
+                String out2 = msg.substring(a - 2, a);
+                String out3 = msg.substring(a + 1, a + 6);
+                long mmm = (out2.toInt()*100000 + out3.toInt())*1.66666666;
+                gps.lon = out1.toInt() * 10000000;
+                gps.lon = gps.lon + mmm; 
                 break;
               }
             case 4: {
