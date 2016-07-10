@@ -45,7 +45,6 @@ GPSDATA GPS::read() {
     if (inChar == '\n') {
       if (inputString.substring(0, 6) == "$GPGGA")
       {
-        Serial.println(inputString);
         nmea_decode(0);
       }
       if (inputString.substring(0, 6) == "$GPRMC")
